@@ -18,7 +18,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -w -m64")
 #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=x86-64   -mavx2")
 
 add_subdirectory(sympiler)
-add_subdirectory(example)
+#add_subdirectory(example)
 
 
 
