@@ -4,6 +4,7 @@
 
 #include <unsupported/Eigen/SparseExtra>
 #include <sympiler_cholesky.h>
+#include "../sympiler/utils/includes/def.h"
 
 int main(int argc, const char *argv[]){
 
@@ -39,7 +40,11 @@ int main(int argc, const char *argv[]){
  A->packed = TRUE;
  A->nz = NULL;
  A->sorted = TRUE;
+ timing_measurement t;
+ t.start_timer();
  auto *sym_chol1 = sympiler::sympiler_chol_symbolic(A, rhs_q);
+ t.measure_elapsed_time();
+ std::cout<<"t: "<<t.elapsed_time<<"\n";
  sym_chol1->numerical_factorization();
  auto *sol = sym_chol1->solve_only();
  sym_chol1->compute_norms();

@@ -43,7 +43,7 @@
    H->sorted = TRUE;
 
    auto *sym_chol = new sym_lib::parsy::SolverSettings(H,b.data());
-   sym_chol->ldl_variant = 4;
+   sym_chol->ldl_variant = 1;
    sym_chol->solver_mode = 0;
    sym_chol->symbolic_analysis();
    sym_chol->numerical_factorization();
@@ -91,7 +91,7 @@
     double *b){
 
    auto *sym_chol = new sym_lib::parsy::SolverSettings(A, b);
-   sym_chol->ldl_variant = 4;
+   sym_chol->ldl_variant = 1;
    sym_chol->solver_mode = 0;
    sym_chol->symbolic_analysis();
    return sym_chol;
