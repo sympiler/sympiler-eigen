@@ -26,7 +26,3 @@ You can follow the [sympiler installation instructions](https://github.com/sympi
 
 
 
-```
-
-add_subdirectory(tools_interface)
-```

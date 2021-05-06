@@ -60,7 +60,6 @@
    int exitflag = 0;
    delete sym_chol;
    delete H;
-   delete []sol;
    return exitflag;
   }
 
@@ -89,10 +88,9 @@
 
   sym_lib::parsy::SolverSettings* sympiler_chol_symbolic(
     // Pass inputs by copy so we get non-const and casted data
-    sym_lib::parsy::CSC *A,
-    double *b){
+    sym_lib::parsy::CSC *A){
 
-   auto *sym_chol = new sym_lib::parsy::SolverSettings(A, b);
+   auto *sym_chol = new sym_lib::parsy::SolverSettings(A);
    sym_chol->ldl_variant = 1;
    sym_chol->solver_mode = 0;
    sym_chol->symbolic_analysis();
