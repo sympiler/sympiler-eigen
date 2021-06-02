@@ -4,7 +4,7 @@
 
 #include <unsupported/Eigen/SparseExtra>
 #include <sympiler_cholesky.h>
-#include "../sympiler/utils/includes/def.h"
+#include <def.h>
 
 int main(int argc, const char *argv[]){
 
