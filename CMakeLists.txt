@@ -35,7 +35,7 @@ download_project(PROJ eigen
         UPDATE_DISCONNECTED 1
         )
 
-set(EIGEN_INCLUDE_DIR ${eigen_SOURCE_DIR}/Eigen/)
+set(EIGEN_INCLUDE_DIR ${eigen_SOURCE_DIR}/)
 
 message( " ==> ${EIGEN_INCLUDE_DIR}")
 
