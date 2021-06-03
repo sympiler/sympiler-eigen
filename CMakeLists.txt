@@ -6,6 +6,10 @@ include(DownloadProject)
 
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/lib/)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/lib/)
+set(SE_EXTERNAL ${CMAKE_CURRENT_LIST_DIR}/external/)
+
+
+
 project(sympiler_eigen)
 
 
@@ -23,6 +27,18 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -w -m64")
 #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=x86-64   -mavx2")
 
 
+
+download_project(PROJ eigen
+        GIT_REPOSITORY https://gitlab.com/libeigen/eigen.git  # https://github.com/KarypisLab/METIS.git
+        PREFIX  ${SE_EXTERNAL}/eigen/
+        BINARY_DIR ${CMAKE_CURRENT_BINARY_DIR}/eigen/
+        UPDATE_DISCONNECTED 1
+        )
+
+set(EIGEN_INCLUDE_DIR ${eigen_SOURCE_DIR}/Eigen/)
+
+message( " ==> ${EIGEN_INCLUDE_DIR}")
+
 #find_package(METIS OPTIONAL_COMPONENTS)
 link_directories(
     ${SYMPILER_LINK_DIR}
@@ -32,6 +48,7 @@ link_directories(
 include_directories( ${CMAKE_CURRENT_SOURCE_DIR}includes
         ${SYMPILER_SPARSE_BLAS_INC}
         ${SYMPILER_SPARSE_BLASP_INC}
+        ${EIGEN_INCLUDE_DIR}
         )
 Set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
 
