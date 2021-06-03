@@ -98,12 +98,13 @@
 
   sym_lib::parsy::SolverSettings* sympiler_chol_symbolic(
     // Pass inputs by copy so we get non-const and casted data
-    sym_lib::parsy::CSC *A, int num_threads, int mode){
+    sym_lib::parsy::CSC *A, int num_threads, sym_lib::parsy::SYM_ORDER  so, int mode){
 
    auto *sym_chol = new sym_lib::parsy::SolverSettings(A);
    sym_chol->ldl_variant = mode;
    sym_chol->num_thread = num_threads;
    sym_chol->solver_mode = 0;
+   sym_chol->sym_order = so;
    sym_chol->symbolic_analysis();
    return sym_chol;
   }

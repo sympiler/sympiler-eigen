@@ -39,7 +39,8 @@
 
   sym_lib::parsy::SolverSettings* sympiler_chol_symbolic(
     // Pass inputs by copy so we get non-const and casted data
-    sym_lib::parsy::CSC *A, int num_threads, int mode = 4);
+    sym_lib::parsy::CSC *A, int num_threads, sym_lib::parsy::SYM_ORDER  so =
+      sym_lib::parsy::SYM_ORDER::S_METIS, int mode = 4);
 
  }
 
