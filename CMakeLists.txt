@@ -1,4 +1,7 @@
 cmake_minimum_required( VERSION 2.5)
+if(COMMAND cmake_policy)
+    cmake_policy(SET CMP0003 NEW)
+endif(COMMAND cmake_policy)
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/sympiler/cmake)
 include(DownloadProject)
@@ -37,7 +40,6 @@ download_project(PROJ eigen
 
 set(EIGEN_INCLUDE_DIR ${eigen_SOURCE_DIR}/)
 
-message( " ==> ${EIGEN_INCLUDE_DIR}")
 
 #find_package(METIS OPTIONAL_COMPONENTS)
 link_directories(
@@ -60,6 +62,7 @@ target_link_libraries(sympiler_eigen
         sym_dense_blas
         lbc
         sympiler_utils
+        metis
         )
 # Uncomment the following line for building examples
 add_subdirectory(example)

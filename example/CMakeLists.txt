@@ -19,5 +19,5 @@ add_executable(sympiler_eigen_demo ${SYMPILERD_SOURCE_FILES}
         cholesky_eigen_driver.cpp )
 target_link_libraries(sympiler_eigen_demo
         sympiler_eigen
-
+        metis
 )
