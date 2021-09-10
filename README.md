@@ -1,3 +1,5 @@
+![APM](https://badgen.net/github/license/micromatch/micromatch)
+
 # sympiler_eigen
 This repository provide an Eigen interface for 
 [Sympiler](https://github.com/sympiler/sympiler) and 
@@ -21,6 +23,24 @@ The current status:
 
 
 ## Installation
+
+### pre-requisites
+Sympiler needs METIS and MKL as dependecies. 
+If METIS does not exist, CMake will handle it. 
+If METIS exists and it is not handled with the CMake, 
+you can add its libray and include paths to `-DCMAKE_PREFIX_PATH=`.
+
+If MKL does not exist, some packages might not be installed. 
+
+After installing dependencies, you should follow:
+```bash
+   git clone --recursive https://github.com/sympiler/sympiler-eigen.git
+   cd sympiler-eigen
+   mkdir build
+   cd build
+   cmake ..
+   make 
+```
 You can follow the [sympiler installation instructions](https://github.com/sympiler/sympiler). 
 
 

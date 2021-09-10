@@ -41,13 +41,13 @@ int main(int argc, const char *argv[]){
  A->nz = NULL;
  A->sorted = TRUE;
  //auto *A = sympiler::sympiler_csc_format(H);
- timing_measurement t;
- t.start_timer();
+ sym_lib::timing_measurement t;
  auto *sym_chol1 = sympiler::sympiler_chol_symbolic(A);
- t.measure_elapsed_time();
- std::cout<<"t: "<<t.elapsed_time<<"\n";
+ t.start_timer();
  sym_chol1->numerical_factorization();
  auto *sol = sym_chol1->solve_only(rhs_q, 1);
+ t.measure_elapsed_time();
+ std::cout<<"t: "<<t.elapsed_time<<"\n";
  sym_chol1->compute_norms(rhs_q);
  x1 = Eigen::Map< Eigen::Matrix<double,Eigen::Dynamic,1> >(
    sol,H.rows(),1);

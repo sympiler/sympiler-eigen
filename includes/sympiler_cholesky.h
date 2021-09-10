@@ -5,8 +5,7 @@
 #ifndef NASOQ_LBL_EIGEN_H
 #define NASOQ_LBL_EIGEN_H
 
-#include <cholesky_solver.h>
-//#include <parsy/common/def.h>
+#include  <parsy/cholesky_solver.h>
 #include <Eigen/Core>
 #include <Eigen/Sparse>
 

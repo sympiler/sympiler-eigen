@@ -16,11 +16,20 @@ set(SE_EXTERNAL ${CMAKE_CURRENT_LIST_DIR}/external/)
 project(sympiler_eigen)
 
 
-set(SYMPILER_UTIL_INC "${CMAKE_CURRENT_SOURCE_DIR}/sympiler/utils/includes")
-set(SYMPILER_UTILE_INC "${CMAKE_CURRENT_SOURCE_DIR}/sympiler/utils/external/includes")
-set(SYMPILER_SPARSE_BLAS_INC "${CMAKE_CURRENT_SOURCE_DIR}/sympiler/sparse_blas/includes")
-set(SYMPILER_SPARSE_BLASP_INC "${CMAKE_CURRENT_SOURCE_DIR}/sympiler/sparse_blas/includes/parsy")
-set(SYMPILER_LBC_INC "${CMAKE_CURRENT_SOURCE_DIR}/sympiler/lbc/src/includes")
+
+find_package(METIS OPTIONAL_COMPONENTS)
+if(NOT METIS_FOUND)
+    set(METIS_INCLUDE_DIR ${LBC_ROOT_DIR}/external/metis/metis_shared-src/include/)
+    set(METIS_INCLUDES ${LBC_ROOT_DIR}/external/metis/metis_shared-src/include/)
+    set(METIS_LIBRARY ${LBC_ROOT_DIR}/lib/)
+    set(METIS_LIBRARIES ${LBC_ROOT_DIR}/lib/)
+    set(METIS_LIB metis)
+    set(METIS_FOUND TRUE)
+else()
+    set(METIS_LIB ${METIS_LIBRARIES})
+endif()
+set(SYMPILER_INC "${CMAKE_CURRENT_SOURCE_DIR}/sympiler/includes/")
+set(SYMPILER_LBC_INC "${CMAKE_CURRENT_SOURCE_DIR}/sympiler/lbc/includes/")
 
 set(SYMPILER_LINK_DIR "${CMAKE_CURRENT_SOURCE_DIR}/sympiler/lib/")
 set(LBC_LINK_DIR "${CMAKE_CURRENT_SOURCE_DIR}/sympiler/lbc/lib/")
@@ -44,26 +53,27 @@ set(EIGEN_INCLUDE_DIR ${eigen_SOURCE_DIR}/)
 #find_package(METIS OPTIONAL_COMPONENTS)
 link_directories(
     ${SYMPILER_LINK_DIR}
-        ${LBC_LINK_DIR}
+    ${LBC_LINK_DIR}
 )
 
 include_directories( ${CMAKE_CURRENT_SOURCE_DIR}includes
-        ${SYMPILER_SPARSE_BLAS_INC}
-        ${SYMPILER_SPARSE_BLASP_INC}
+        ${SYMPILER_INC}
+        ${SYMPILER_LBC_INC}
         ${EIGEN_INCLUDE_DIR}
         )
+
 Set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
 
 add_subdirectory(sympiler)
 add_library(sympiler_eigen
         sympiler_cholesky.cpp)
+
 target_link_libraries(sympiler_eigen
         sym_sparse_blas
-        sym_dense_blas
         lbc
-        sympiler_utils
-        metis
+        ${METIS_LIB}
         )
+
 # Uncomment the following line for building examples
 add_subdirectory(example)
 
